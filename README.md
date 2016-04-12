@@ -1,4 +1,8 @@
-###IoC属性延迟注入解决思路
+##延迟注入(Lazy Injection)
+对IoC和DI的一个思考：
+```
+在属性注入中，属性注入的时机发生在我们首次使用属性时，即被注入的属性第一次在使用前都为null来提高性能和节约内存，我把这个方式叫做——"延迟注入(Lazy Injection)"
+```
 在我们的简易IoC Container中，提供了一个特性 InjectionAttribute
 ```cs
 [AttributeUsage(AttributeTargets.Property , AllowMultiple = false)]
