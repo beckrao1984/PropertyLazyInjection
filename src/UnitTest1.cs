@@ -13,14 +13,10 @@ namespace PropertyLazyInjection
             container.Register<ILogger , Logger>();
             container.Register<IFooService , FooService>();
             var foo = container.Resolve<IFooService>();
-
             Console.WriteLine("IFooService is created");
             Console.WriteLine("Logger is not create");
-
-            var logger = foo.Logger;
-            
+            var logger = foo.Logger;           
             Console.WriteLine("Logger is created");
-
             var logger2 = foo.Logger;
         }
     }

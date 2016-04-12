@@ -52,7 +52,7 @@ namespace PropertyLazyInjection
             var attributes = MethodAttributes.Public | MethodAttributes.Virtual;
             foreach (var property in properties)
             {
-                if (!property.CanRead|| !property.CanWrite) continue;
+                if (!property.CanRead || !property.CanWrite) continue;
                 if (property.GetMethod.IsStatic || !property.GetMethod.IsVirtual) continue;
                 var attr = property.GetCustomAttribute<InjectionAttribute>();
                 if (attr == null || !attr.Lazy) continue;
