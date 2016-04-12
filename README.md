@@ -1,5 +1,5 @@
 ###IoC属性延迟注入解决思路
-在我们的简易IoC Container中，我们提供了一个特性 InjectionAttribute
+在我们的简易IoC Container中，提供了一个特性 InjectionAttribute
 ```cs
 [AttributeUsage(AttributeTargets.Property , AllowMultiple = false)]
 public class InjectionAttribute : Attribute
@@ -19,13 +19,37 @@ public class FooService : IFooService
     }
 }
 ```
-Logger实现ILogger接口，并在构造器中打印“Logger is created”：
+Logger实现ILogger接口，并在构造器中打印"Logger is creating .."
 ```cs
 public class Logger : ILogger
 {
     public Logger()
     {
-        Console.WriteLine("Logger is created");
+        Console.WriteLine("Logger is creating ..");
     }
 }
 ```
+测试代码：
+```cs
+[TestMethod]
+public void LazyInjection_Test()
+{
+    Container container = new Container();
+    container.Register<ILogger , Logger>();
+    container.Register<IFooService , FooService>();
+    var foo = container.Resolve<IFooService>();
+    Console.WriteLine("IFooService is created");
+    Console.WriteLine("Logger is not create");
+    var logger = foo.Logger;           
+    Console.WriteLine("Logger is created");
+    var logger2 = foo.Logger;
+}
+```
+输出：
+```		
+IFooService is created
+Logger is not create
+Logger is creating ..
+Logger is created
+```
+

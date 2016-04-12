@@ -10,7 +10,7 @@ namespace PropertyLazyInjection
     {
         public Logger()
         {
-            Console.WriteLine("Logger is created");
+            Console.WriteLine("Logger is creating ..");
         }
     }
 }
